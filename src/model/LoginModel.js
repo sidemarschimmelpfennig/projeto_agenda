@@ -15,28 +15,41 @@ class Login {
         this.errors = [] 
         this.user = null
     }
+    async login (){
+        this.valida()
+        if (this.errors.length > 0 ) return;
+        this.user =  await LoginModel.findOne({email : this.body.email })
+
+        if(!this.user){
+            this.errors.push('Usuário não existe.')
+            return
+        }
+        
+        if(!bcryptJs.compareSync(this.body.password, this.user.password)){
+            this.errors.push('Senha inválida.')
+            this.user = null 
+            return
+        }
+    }
     async register(){
         this.valida()
         if (this.errors.length > 0 ) return
 
         await this.userExists()
-        
+
         if (this.errors.length > 0 ) return
         //criptografa
         const salt = bcryptJs.genSaltSync()
         this.body.password = bcryptJs.hashSync(this.body.password , salt)
         
         //cria novo usuário
-        try{
-            this.user = await LoginModel.create(this.body)
-        }catch(e){
-            console.log(e)
-        }
+        this.user = await LoginModel.create(this.body)
+
     }
 
     async userExists(){
-       const user =  await LoginModel.findOne({email : this.body.email })
-       if (user) this.errors.push('Usuário existente.')
+       this.user =  await LoginModel.findOne({email : this.body.email })
+       if (this.user) this.errors.push('Usuário existente.')
     }
     valida(){
         this.cleanUp()

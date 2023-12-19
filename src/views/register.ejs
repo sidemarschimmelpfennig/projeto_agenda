@@ -5,17 +5,18 @@
           <div class="col-lg-2"></div>
           <div class="col-lg-8 my-3">
                <h1 class="text-center">
-                    Login 
+                    Cadastre - se 
                </h1>
                <p class="text-center lead">
-                    Entre em sua conta agora mesmo.
+                    Crie sua conta preenchendo os campos abaixo.
                </p>
 
                <%- include('includes/messages') %>
 
                <div class="row">
                     <div class="col-lg">
-                        <form action="/login/" method="POST">
+                        <h4>Dados de cadastro : </h4>
+                        <form action="/login/register" method="POST">
                             <input type="hidden" name="_csrf" value=<%= csrfToken %>>
                             <div class="mb-3">
                               <label class="form-label">Seu Email</label>
@@ -25,15 +26,12 @@
                               <label class="form-label">Sua senha</label>
                               <input type="password" class="form-control" name="password" >
                             </div>
-                            <button type="submit" class="btn btn-dark">Faça login</button>
+                            <button type="submit" class="btn btn-dark btn-sm">Criar minha conta</button>
                           </form>
-                          <br>
-                          <p><a href="/login/register" class="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Faça seu cadastro</a></p>
                     </div>
-               </div>
+                </div>
           </div>
-          
-          <div class="col-lg-2"></div>
-     </div>
+        </div>          
+    </div>
 </div>
 <%- include('includes/footer') %>

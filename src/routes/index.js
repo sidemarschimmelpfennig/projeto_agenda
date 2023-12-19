@@ -1,12 +1,12 @@
 const route = require('express').Router()
-const { index } = require("../controllers/homeController");
-const {login , register} = require('../controllers/loginController')
+const routesHome = require('./routesHome')
+const routesLogin = require('./routesLogin')
+const routesContact = require('./routesContact')
 
-route.get('/', index)
 
-
-route.get('/login/', login)
-route.post('/login/register', register)
-route.post('/login/login', register)
+//rotas principais fazendo suas ramificaçoes
+route.use('/',routesHome)
+route.use('/login', routesLogin)
+route.use('/contact', routesContact)
 
 module.exports = route
