@@ -1,7 +1,9 @@
 const Login = require('../model/LoginModel')
 
-exports.renderLogin = (req,res) =>{
-    if(req.session.user) return res.render('index')
+exports.renderLogin = async(req,res) =>{
+    if(req.session.user) {
+        return await res.redirect('/')
+    }
     return res.render('login')   
 }
 exports.login = async function(req, res){
@@ -57,7 +59,7 @@ exports.register = async (req, res) => {
 
 exports.logout = (req, res) => {
     req.session.destroy()
-    res.redirect('/')
+    res.redirect('/login')
 }
 
 module.exports = exports

@@ -1,9 +1,9 @@
 <%- include('includes/head') %>
 <%- include('includes/nav') %>
-<div class="container">
+<div class="container d-flex justify-content-center">
      <div class="row">
           <div class="col-lg-2"></div>
-          <div class="col-lg-8 my-3">
+          <div class="col-lg-14 my-5">
                <h1 class="text-center">
                     Login 
                </h1>
@@ -13,9 +13,9 @@
 
                <%- include('includes/messages') %>
 
-               <div class="row">
+               <div class="row" style="width: 100%;">
                     <div class="col-lg">
-                        <form action="/login/" method="POST">
+                        <form action="/login" method="POST" class="col-md-4" style="width: 100%;">
                             <input type="hidden" name="_csrf" value=<%= csrfToken %>>
                             <div class="mb-3">
                               <label class="form-label">Seu Email</label>

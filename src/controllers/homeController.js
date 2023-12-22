@@ -1,6 +1,6 @@
+const Contact = require('../model/ContactModel')
 
-exports.index = (req, res) =>{
-    res.render('index')
-    return
+exports.index = async(req, res) =>{
+    const contacts = await Contact.searchContacts()
+    res.render('index', {contacts})
 }
-

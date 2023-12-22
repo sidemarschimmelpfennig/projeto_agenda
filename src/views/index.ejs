@@ -7,45 +7,43 @@
                <h1 class="text-center">
                     Agenda
                </h1>
+                <% if (contacts.length > 0){ %>
                <p class="text-center lead">
                     Seus Contatos estão abaixo.
                </p>
+               <% }else{ %>
+                    <p class="text-center lead">
+                        Agenda vazia clique em Novo Contato 
+                    </p>
+               <% } %>
           </div>
-          <div class="responsive-table">
-               <table class="table my-3">
+               <% if (contacts.length > 0){ %>
+               <div class="responsive-table">
+               
+                    <table class="table my-3">
                     <tr>
                          <td>Nome</td>
                          <td>Sobrenome</td>
                          <td>Email</td>
                          <td>Contato</td>   
                     </tr>
+                    <% contacts.forEach(contact => { %>
                     <tr>
-                         <td>Sidemar</td>
-                         <td>Junior</td>
-                         <td>sidemarschi@gmail.com</td>
-                         <td>(49) 99816-4594</td>   
+                         <td><%= contact.nome %></td>
+                         <td><%= contact.sobrenome %></td>
+                         <td><%= contact.email %></td>
+                         <td><%= contact.telefone %></td>   
+                         <td><a href="/contact/<%= contact._id %>">Editar</a></td>
+                         <td><a class="text-danger" href="contact/delete/<%= contact._id %>">Deletar</a></td>
                     </tr>
-                    <tr>
-                         <td>Sidemar</td>
-                         <td>Junior</td>
-                         <td>sidemarschi@gmail.com</td>
-                         <td>(49) 99816-4594</td>   
-                    </tr>
-                    <tr>
-                         <td>Sidemar</td>
-                         <td>Junior</td>
-                         <td>sidemarschi@gmail.com</td>
-                         <td>(49) 99816-4594</td>   
-                    </tr>
-                    <tr>
-                         <td>Sidemar</td>
-                         <td>Junior</td>
-                         <td>sidemarschi@gmail.com</td>
-                         <td>(49) 99816-4594</td>   
-                    </tr>
-               </table>
-          </div>
-          <div class="col-lg-2"></div>
+                    <% }); %>
+                    </table>
+               </div>
+               <% } %>
+               <div class="col-lg-2">
+                    
+               </div>
+          
      </div>
 </div>
 <%- include('includes/footer') %>

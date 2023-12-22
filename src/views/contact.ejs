@@ -2,44 +2,46 @@
 <%- include('includes/nav') %>
 
 <div class="container">
-    <div class="row">
-         <div class="col-lg-2"></div>
-         <div class="col-lg-8 my-3">
-                <h1 class="text-center">
-                    Novo Contato
-                </h1>
-                <p class="text-center lead">
-                    Crie um novo Contato preenchendo os dados abaixo.
-                </p>
+  <div class="row">
+    <div class="col-lg-2"></div>
+    
+    <div class="col-lg-8 my-3">
+      <h1 class="text-center">Contato</h1>
+      <p class="text-center lead">Crie ou edite seu contato abaixo.</p>
 
-                <%- include('includes/messages') %>
+      <%- include('includes/messages') %>
 
-                <div class="row">
-                   <div class="col-lg">
-                       <form action="/contact/register" method="POST">
-                           <input type="hidden" name="_csrf" value=<%= csrfToken %>>
-                           <div class="mb-3">
-                             <label class="form-label">nome</label>
-                             <input type="text" class="form-control" name="nome">
-                           </div>
-                           <div class="mb-3">
-                             <label class="form-label">Sobrenome</label>
-                             <input type="text" class="form-control" name="sobrenome" >
-                           </div>
-                           <div class="mb-3">
-                            <label class="form-label">Email</label>
-                            <input type="email" class="form-control" name="email">
-                          </div>
-                          <div class="mb-3">
-                            <label class="form-label">Telefone</label>
-                            <input type="tel" class="form-control" name="telefone">
-                          </div>
-                           <button type="submit" class="btn btn-dark ">Criar contato</button>
-                         </form>
-                   </div>
-                </div>
-         </div>
-       </div>          
-   </div>
+
+      <% if(contact._id) { %>
+        <form action="/contact/edit/<%= contact._id %>" method="POST">
+        <% } else { %>
+        <form action="/contact/register" method="POST">
+        <% } %>
+        <input type="hidden" name="_csrf" value=<%= csrfToken %>>
+        <div class="mb-3">
+          <label class="form-label">Nome</label>
+          <input value="<%= contact.nome %>" type="text" class="form-control" name="nome">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Sobrenome</label>
+          <input value="<%= contact.sobrenome %>" type="text" class="form-control" name="sobrenome">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Email</label>
+          <input value="<%= contact.email %>" type="email" class="form-control" name="email">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Telefone</label>
+          <input value="<%= contact.telefone %>" type="tel" class="form-control" name="telefone">
+        </div>
+        <button type="submit" class="btn btn-dark">Salvar</button>
+      </form>
+
+
+    </div>
+
+    <div class="col-lg-2"></div>
+  </div>
 </div>
+
 <%- include('includes/footer') %>
