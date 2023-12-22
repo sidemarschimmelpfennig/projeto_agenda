@@ -14,7 +14,7 @@ const flash = require('connect-flash')
 const path = require('path')
 const routes = require('./src/routes')
 
-//app.use(helmet()) // começou a  causar problemas inicialmente nas rotas
+app.use(helmet()) // começou a  causar problemas inicialmente nas rotas
 app.use(express.urlencoded({extended: true}))
 app.use(express.static(path.resolve(__dirname, 'public')))
 
