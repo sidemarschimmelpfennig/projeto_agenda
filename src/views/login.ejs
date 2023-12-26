@@ -2,8 +2,8 @@
 <%- include('includes/nav') %>
 <div class="container d-flex justify-content-center">
      <div class="row">
-          <div class="col-lg-2"></div>
           <div class="col-lg-14 my-5">
+               <div class="col-lg-2"></div>
                <h1 class="text-center">
                     Login 
                </h1>
@@ -15,20 +15,20 @@
 
                <div class="row" style="width: 100%;">
                     <div class="col-lg">
-                        <form action="/login" method="POST" class="col-md-4" style="width: 100%;">
+                        <form action="/login" method="POST" class="col-md-4 " style="width: 100%;" id="form-login">
                             <input type="hidden" name="_csrf" value=<%= csrfToken %>>
                             <div class="mb-3">
-                              <label class="form-label">Seu Email</label>
+                              <label >Seu Email</label>
                               <input type="email" class="form-control" name="email">
                             </div>
                             <div class="mb-3">
-                              <label class="form-label">Sua senha</label>
+                              <label>Sua senha</label>
                               <input type="password" class="form-control" name="password" >
                             </div>
-                            <button type="submit" class="btn btn-dark">Faça login</button>
-                          </form>
-                          <br>
-                          <p><a href="/login/register" class="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Faça seu cadastro</a></p>
+                            <button type="submit" class="btn btn-dark form-control">Faça login</button>
+                         </form>
+                         <br>
+                         <a href="/login/register" class="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" >Faça seu cadastro</a>
                     </div>
                </div>
           </div>

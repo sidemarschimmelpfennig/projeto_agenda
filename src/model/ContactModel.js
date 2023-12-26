@@ -31,8 +31,7 @@ Contact.prototype.validate = function () {
   this.cleanUp();
 
   //validacao
-  if (this.body.email && !validator.isEmail(this.body.email))
-    this.errors.push("E-mail inválido");
+  if (this.body.email && !validator.isEmail(this.body.email))this.errors.push("E-mail inválido");
   if (!this.body.nome) this.errors.push("Campo nome é obrigatório");
   if (!this.body.email && !this.body.telefone)
     this.errors.push("Pelo menos o telefone ou o emailprecisam ser enviados");
@@ -80,7 +79,7 @@ Contact.searchContacts = async function () {
 
 Contact.deleteContact = async function (id){
   if (typeof id !== "string") return;
-  const contact = await ContactModel.findOneAndDelete(id)
+  const contact = await ContactModel.findOneAndDelete({_id : id})
   return contact
 }
 

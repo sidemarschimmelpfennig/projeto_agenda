@@ -16,7 +16,7 @@ exports.registerContact = async(req, res) => {
             return
         }
         req.flash('success', 'Contato criado com sucesso.')
-        req.session.save(() => res.redirect(`/contact/${contact.contact._id}`))
+        req.session.save(() => res.redirect(`/`))
         return
     }catch(e){
         console.log(e)
@@ -26,18 +26,12 @@ exports.registerContact = async(req, res) => {
 }
 
 exports.editContact = async (req, res) => {
-    try{
         if (!req.params.id)return res.render('404')
 
         const contact = await Contact.searchForId(req.params.id)
         if(!contact) return res.render('404')
         
         res.render('contact', {contact})
-    }catch(e){
-        console.log(e)
-        res.render('404')
-    }
-
 }
  
 exports.editContactSave = async (req, res) => {

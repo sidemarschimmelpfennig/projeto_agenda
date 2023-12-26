@@ -21,20 +21,20 @@
                <div class="responsive-table">
                
                     <table class="table my-3">
+                    <% contacts.forEach(contact => { %>
                     <tr>
                          <td>Nome</td>
                          <td>Sobrenome</td>
                          <td>Email</td>
-                         <td>Contato</td>   
+                         <td>Contato</td> 
                     </tr>
-                    <% contacts.forEach(contact => { %>
                     <tr>
                          <td><%= contact.nome %></td>
                          <td><%= contact.sobrenome %></td>
                          <td><%= contact.email %></td>
                          <td><%= contact.telefone %></td>   
-                         <td><a href="/contact/<%= contact._id %>">Editar</a></td>
-                         <td><a class="text-danger" href="contact/delete/<%= contact._id %>">Deletar</a></td>
+                         <td style="max-width: 65px;min-width: 65px"><a href="/contact/<%= contact._id %>" class="btn btn-primary btn-lg  btn-sm" tabindex="-1" role="button" aria-disabled="true">Editar</a> 
+                         <a class="btn  btn-danger btn-lg btn-sm" tabindex="-1" role="button" aria-disabled="true" href="contact/delete/<%= contact._id %>">Deletar</a></td>
                     </tr>
                     <% }); %>
                     </table>
