@@ -2,8 +2,9 @@
   "name": "projeto_agenda",
   "version": "1.0.0",
   "description": "project C.R.U.D  of scheduling free code || projeto de agenda codigo aberto",
-  "main": "index.js",
+  "main": "server.js",,
   "scripts": {
+    "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "server": "nodemon ./server --ignore public --ignore frontend",
     "dev": "webpack -w"
