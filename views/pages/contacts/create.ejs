@@ -1,5 +1,5 @@
-<%- include('includes/head') %>
-<%- include('includes/nav') %>
+<%- include('../../components/head') %>
+<%- include('../../components/nav') %>
 
 <div class="container">
   <div class="row">
@@ -9,22 +9,22 @@
       <h1 class="text-center">Contato</h1>
       <p class="text-center lead">Crie ou edite seu contato abaixo.</p>
 
-      <%- include('includes/messages') %>
+      <%- include('../../components/messages') %>
 
 
-      <% if(contact._id) { %>
-        <form action="/contact/edit/<%= contact._id %>" method="POST">
+      <% if(contact.id) { %>
+        <form action="/contact/edit/<%= contact.id %>" method="POST">
         <% } else { %>
         <form action="/contact/register" method="POST">
         <% } %>
         <input type="hidden" name="_csrf" value=<%= csrfToken %>>
         <div class="mb-3">
           <label class="form-label">Nome</label>
-          <input value="<%= contact.nome %>" type="text" class="form-control" name="nome">
+          <input value="<%= contact.name %>" type="text" class="form-control" name="name">
         </div>
         <div class="mb-3">
           <label class="form-label">Sobrenome</label>
-          <input value="<%= contact.sobrenome %>" type="text" class="form-control" name="sobrenome">
+          <input value="<%= contact.last_name %>" type="text" class="form-control" name="last_name">
         </div>
         <div class="mb-3">
           <label class="form-label">Email</label>
@@ -32,7 +32,7 @@
         </div>
         <div class="mb-3">
           <label class="form-label">Telefone</label>
-          <input value="<%= contact.telefone %>" type="tel" class="form-control" name="telefone">
+          <input value="<%= contact.phone %>" type="tel" class="form-control" name="phone">
         </div>
         <button type="submit" class="btn btn-dark">Salvar</button>
       </form>
@@ -44,4 +44,4 @@
   </div>
 </div>
 
-<%- include('includes/footer') %>
+<%- include('../../components/footer') %>

@@ -1,19 +1,222 @@
 <%- include('components/head') %>
-<%- include('components/navbar') %>
 
-<div class="container">
-  <div class="row">
-    <div class="col-lg-2"></div>
-    <div class="col-lg-8 my-5">
-      <h1 class="text-center">
-        Projeto Minha Agenda
-      </h1>
-      <p class="text-center lead">
-        Inicie em sua agenda de gestão agora mesmo.
-      </p> 
-    </div>
-    <div class="col-lg-2"></div>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bg: #1c1d21;
+    --bg-soft: #26272c;
+    --line: rgba(255, 255, 255, 0.06);
+    --text: #e9e9ec;
+    --muted: #b5b6bc;
+    --lime: #a6f20f;
+    --yellow: #e8f21c;
+    --pink: #ff2d87;
+    --cyan: #22d3ee;
+    --grad: linear-gradient(90deg, var(--lime) 0%, var(--pink) 100%);
+    --grad-title: linear-gradient(90deg, #8ff21c 0%, #d97aa0 35%, #e8e41c 60%, #ff2d87 100%);
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Open Sans', system-ui, sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ---------- Header ---------- */
+  .dev-header {
+    position: sticky; top: 0; z-index: 10;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: .55rem 1rem;
+    background: rgba(38, 39, 44, .92);
+    backdrop-filter: blur(8px);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, .35);
+  }
+  .dev-brand {
+    font-family: 'Montserrat', sans-serif; font-weight: 800;
+    font-size: 1.25rem; letter-spacing: .5px; text-decoration: none;
+  }
+  .dev-brand .a { color: var(--lime); }
+  .dev-brand .b { color: #3b82f6; }
+  .dev-nav { display: flex; gap: .5rem; }
+  .btn-outline-dev, .btn-grad-outline {
+    font-size: .85rem; padding: .3rem .8rem; border-radius: 999px;
+    color: var(--text); text-decoration: none; transition: all .2s ease;
+  }
+  .btn-outline-dev { border: 1px solid #cfcfd4; }
+  .btn-outline-dev:hover { background: #fff; color: var(--bg); }
+  .btn-grad-outline {
+    font-weight: 600;
+    border: 2px solid transparent;
+    background: linear-gradient(var(--bg-soft), var(--bg-soft)) padding-box, var(--grad) border-box;
+  }
+  .btn-grad-outline:hover { background: var(--grad) border-box; color: #111; }
+
+  /* ---------- Background decorations ---------- */
+  .bg-deco { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
+  .grid-box {
+    position: absolute; width: 250px; height: 220px;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size: 52px 52px;
+    border: 1px solid var(--line);
+  }
+  .dots {
+    position: absolute; width: 90px; height: 90px;
+    background-image: radial-gradient(rgba(255,255,255,.12) 2.5px, transparent 3px);
+    background-size: 18px 18px;
+  }
+  .code-sym {
+    position: absolute; font-family: 'Montserrat', monospace; font-weight: 700;
+    color: rgba(255, 255, 255, .08); font-size: 1.9rem; user-select: none;
+    animation: float 7s ease-in-out infinite;
+  }
+  .code-lines { position: absolute; display: flex; flex-direction: column; gap: 8px; }
+  .code-lines span { height: 4px; border-radius: 2px; background: rgba(255,255,255,.07); }
+  @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    position: relative; z-index: 1;
+    min-height: calc(100vh - 52px);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; padding: 3rem 1rem;
+  }
+  .hero-illustration {
+    width: 130px; height: 130px; margin-bottom: 1.5rem;
+    filter: drop-shadow(0 0 28px rgba(166, 242, 15, .35));
+    animation: float 5s ease-in-out infinite;
+  }
+  .hero h1 {
+    font-family: 'Montserrat', sans-serif; font-weight: 800;
+    font-size: clamp(2.4rem, 6vw, 3.6rem); letter-spacing: 2px; margin: 0 0 .75rem;
+    background: var(--grad-title); background-size: 200% auto;
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    animation: shine 6s linear infinite;
+  }
+  @keyframes shine { to { background-position: 200% center; } }
+  .hero .subtitle { font-size: clamp(1.15rem, 2.4vw, 1.5rem); color: var(--text); margin-bottom: .6rem; }
+  .hero .desc { color: var(--muted); font-size: .95rem; margin-bottom: 2.2rem; }
+
+  .search-bar {
+    display: flex; align-items: center; width: min(410px, 100%);
+    background: #2c2d33; border-radius: 999px; padding: 5px 5px 5px 1.1rem;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.05), 0 6px 20px rgba(0,0,0,.35);
+    transition: box-shadow .25s ease;
+  }
+  .search-bar:focus-within { box-shadow: 0 0 0 2px rgba(166,242,15,.45), 0 6px 24px rgba(0,0,0,.4); }
+  .search-bar input {
+    flex: 1; background: transparent; border: 0; outline: 0;
+    color: var(--text); font-size: .88rem;
+  }
+  .search-bar input::placeholder { color: #a9aab0; }
+  .btn-grad {
+    border: 0; border-radius: 999px; padding: .4rem 1rem;
+    background: var(--grad); color: #fff; font-weight: 600; font-size: .88rem;
+    text-decoration: none; transition: transform .2s ease, box-shadow .2s ease;
+  }
+  .btn-grad:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(255, 45, 135, .4); color: #fff; }
+
+  .cta { display: flex; gap: 1rem; margin-top: 1.8rem; flex-wrap: wrap; justify-content: center; }
+  .cta .btn-grad { padding: .55rem 1.2rem; font-size: .95rem; }
+  .btn-ghost {
+    border: 2px solid #e9e9ec; border-radius: 999px; padding: .45rem 1.1rem;
+    color: var(--text); font-weight: 600; font-size: .95rem; text-decoration: none;
+    transition: all .2s ease;
+  }
+  .btn-ghost:hover { background: #fff; color: var(--bg); }
+
+  @media (max-width: 768px) { .grid-box, .code-lines { display: none; } }
+</style>
+
+<!-- Header -->
+<header class="dev-header">
+  <a class="dev-brand" href="/"><span class="a">AGENDA</span> <span class="b">DO DEV</span></a>
+  <nav class="dev-nav">
+    <% if (typeof user !== 'undefined' && user) { %>
+      <a id="nav-contacts" class="btn-outline-dev" href="/contacts">Contatos</a>
+      <a id="nav-logout" class="btn-grad-outline" href="/auth/logout">Sair</a>
+    <% } else { %>
+      <a id="nav-login" class="btn-outline-dev" href="/auth/login">Entrar</a>
+      <a id="nav-register" class="btn-grad-outline" href="/auth/register">Criar Conta</a>
+    <% } %>
+  </nav>
+</header>
+
+<!-- Background decorations -->
+<div class="bg-deco" aria-hidden="true">
+  <div class="grid-box" style="top:40px; left:0;"></div>
+  <div class="grid-box" style="bottom:0; right:0; height:230px;"></div>
+  <div class="dots" style="top:60px; right:20px;"></div>
+  <div class="dots" style="bottom:70px; left:55px;"></div>
+  <span class="code-sym" style="top:90px; left:180px;">&lt;/&gt;</span>
+  <span class="code-sym" style="top:300px; left:55px; animation-delay:1s;">&lt;/&gt;</span>
+  <span class="code-sym" style="bottom:40px; left:190px; animation-delay:2s;">&lt;/&gt;</span>
+  <span class="code-sym" style="bottom:45px; left:48%; animation-delay:3s;">{ }</span>
+  <span class="code-sym" style="top:270px; right:80px; animation-delay:1.5s;">{ }</span>
+  <span class="code-sym" style="bottom:50px; right:120px; animation-delay:2.5s;">&lt;/&gt;</span>
+  <div class="code-lines" style="top:160px; right:60px;">
+    <span style="width:60px"></span><span style="width:30px"></span>
+    <span style="width:90px"></span><span style="width:70px"></span><span style="width:45px"></span>
   </div>
 </div>
+
+<!-- Hero -->
+<main class="hero">
+  <svg class="hero-illustration" viewBox="0 0 160 160" role="img" aria-label="Agenda com lupa">
+    <!-- tags -->
+    <rect x="88" y="14" width="36" height="22" rx="4" fill="#a6f20f"/>
+    <circle cx="100" cy="25" r="6" fill="#111"/><path d="M100 21v4l3 2" stroke="#a6f20f" stroke-width="1.6" fill="none"/>
+    <rect x="102" y="28" width="40" height="22" rx="4" fill="#ff2d87"/>
+    <rect x="108" y="33" width="12" height="11" rx="1.5" fill="#111"/>
+    <path d="M125 39l4 4 7-8" stroke="#111" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+    <rect x="120" y="58" width="22" height="20" rx="4" fill="#e8f21c"/>
+    <circle cx="129" cy="66" r="4" stroke="#111" stroke-width="2" fill="none"/><path d="M132 69l4 4" stroke="#111" stroke-width="2"/>
+    <rect x="114" y="54" width="8" height="14" fill="#ff2d87"/>
+    <path d="M128 84l5 5 5-5" stroke="#22d3ee" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+    <path d="M130 100l6 6-6 6" stroke="#fff" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+    <!-- arrow -->
+    <path d="M30 50c0-18 14-28 34-26" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <path d="M58 18l8 6-8 6" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <!-- speed lines -->
+    <path d="M10 76h18M16 84h12M14 68h12" stroke="#22d3ee" stroke-width="3" stroke-linecap="round"/>
+    <!-- notebook -->
+    <rect x="40" y="42" width="78" height="96" rx="6" fill="#fff"/>
+    <rect x="36" y="38" width="78" height="96" rx="6" fill="#33353b" stroke="#111" stroke-width="4"/>
+    <line x1="48" y1="40" x2="48" y2="132" stroke="#111" stroke-width="3"/>
+    <g stroke="#111" stroke-width="4" fill="none" stroke-linecap="round">
+      <path d="M44 52a6 6 0 1 0-6 6"/><path d="M44 68a6 6 0 1 0-6 6"/><path d="M44 84a6 6 0 1 0-6 6"/>
+      <path d="M44 100a6 6 0 1 0-6 6"/><path d="M44 116a6 6 0 1 0-6 6"/>
+    </g>
+    <path d="M58 52h8M58 108h8M58 120h12" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/>
+    <path d="M78 108h22M78 120h22" stroke="#111" stroke-width="2.6" stroke-linecap="round"/>
+    <!-- magnifier -->
+    <line x1="104" y1="100" x2="122" y2="118" stroke="#111" stroke-width="12" stroke-linecap="round"/>
+    <line x1="104" y1="100" x2="120" y2="116" stroke="#22d3ee" stroke-width="5" stroke-linecap="round"/>
+    <circle cx="88" cy="80" r="26" fill="#111"/>
+    <circle cx="88" cy="80" r="19" fill="#2a2c31" stroke="#fff" stroke-width="3"/>
+    <path d="M76 72a14 14 0 0 1 12-8" stroke="#22d3ee" stroke-width="3.4" fill="none" stroke-linecap="round"/>
+    <path d="M82 80h18M82 88h14" stroke="#111" stroke-width="2.6" stroke-linecap="round"/>
+  </svg>
+
+  <h1>AGENDA DO DEV</h1>
+  <p class="subtitle">Inicie em sua agenda de gestão agora mesmo</p>
+  <p class="desc">O buscador de compromissos e tarefas ideal para desenvolvedores.</p>
+
+  <form class="search-bar" action="/contacts" method="GET" role="search">
+    <input id="home-search" type="search" name="q" placeholder="Buscar compromissos, tarefas ou eventos..." aria-label="Buscar">
+    <button id="home-search-btn" type="submit" class="btn-grad">Buscar</button>
+  </form>
+
+  <div class="cta">
+    <a id="cta-start" class="btn-grad" href="/auth/register">Iniciar Grátis</a>
+    <a id="cta-more" class="btn-ghost" href="#">Saber Mais</a>
+  </div>
+</main>
 
 <%- include('components/footer') %>

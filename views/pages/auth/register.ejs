@@ -15,8 +15,12 @@
                <div class="row " style="width: 100%;">
                     <div class="col-lg">
                         <h4>Dados de cadastro : </h4>
-                        <form action="/login/register" method="POST" class="col-md-4  " style="width: 100%;" id="form-register">
-                            <input type="hidden" name="_csrf" value=<%= csrfToken %>>
+                        <form action="/auth/register" method="POST" class="col-md-4  " style="width: 100%;" id="form-register">
+                            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                            <div class="mb-3">
+                              <label >Seu Nome</label>
+                              <input type="text" class="form-control" name="name">
+                            </div>
                             <div class="mb-3">
                               <label >Seu Email</label>
                               <input type="email" class="form-control" name="email">

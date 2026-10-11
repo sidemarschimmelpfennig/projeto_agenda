@@ -2,6 +2,7 @@
 import { NestFactory } from '@nestjs/core';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { join } from 'path';
+import express from 'express';
 import cookieParser from 'cookie-parser';
 import csurf from 'csurf';
 import { AppModule } from './app.module';
@@ -14,10 +15,14 @@ async function bootstrap() {
   app.setBaseViewsDir(join(__dirname, '..', 'views'));
   app.setViewEngine('ejs');
 
-  // 1. Parser de cookies (obrigatório para csurf com cookie)
+  // 1. Processa o corpo da requisição antes do csurf (necessário para ler req.body._csrf)
+  app.use(express.urlencoded({ extended: true }));
+  app.use(express.json());
+
+  // 2. Parser de cookies (obrigatório para csurf com cookie)
   app.use(cookieParser());
 
-  // 2. Middleware que gera e valida CSRF
+  // 3. Middleware que gera e valida CSRF
   app.use(csurf({ cookie: true }));
 
   // 3. Middleware para passar o token para todas as views EJS automaticamente

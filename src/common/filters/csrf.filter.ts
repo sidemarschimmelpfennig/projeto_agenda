@@ -14,6 +14,11 @@ export class CsrfFilter implements ExceptionFilter {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse<Response>();
 
+    // Evita erro se a resposta já foi enviada (ex: redirect em Guards)
+    if (response.headersSent) {
+      return;
+    }
+
     // Captura o erro clássico do pacote csurf quando o token é inválido ou ausente
     if (exception.code === 'EBADCSRFTOKEN') {
       return response.status(HttpStatus.FORBIDDEN).render('403', {
