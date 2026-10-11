@@ -1,0 +1,41 @@
+<%- include('../../components/head') %>
+<%- include('../../components/navbar') %>
+<div class="container d-flex justify-content-center">
+     <div class="row ">
+          <div class="col-lg-2"></div>
+          <div class="col-lg-12 my-5">
+               <h1 class="text-center">
+                    Cadastre - se 
+               </h1>
+               <p class="text-center lead">
+                    Crie sua conta preenchendo os campos abaixo.
+               </p>
+
+               
+               <div class="row " style="width: 100%;">
+                    <div class="col-lg">
+                        <h4>Dados de cadastro : </h4>
+                        <form action="/auth/register" method="POST" class="col-md-4  " style="width: 100%;" id="form-register">
+                            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                            <div class="mb-3">
+                              <label >Seu Nome</label>
+                              <input type="text" class="form-control" name="name">
+                            </div>
+                            <div class="mb-3">
+                              <label >Seu Email</label>
+                              <input type="email" class="form-control" name="email">
+                            </div>
+                            <div class="mb-3">
+                              <label >Sua senha</label>
+                              <input type="password" class="form-control" name="password" >
+                            </div>
+                            <button type="submit" class="btn btn-dark form-control">Criar minha conta</button>
+                          </form>
+                    </div>
+               </div>
+          </div>
+        </div>          
+    </div>
+</div>
+
+<%- include('../../components/footer') %>
