@@ -1,39 +1,38 @@
 <%- include('../../components/head') %>
 <%- include('../../components/navbar') %>
-<div class="container d-flex justify-content-center">
-     <div class="row">
-          <div class="col-lg-14 my-5">
-               <div class="col-lg-2"></div>
-               <h1 class="text-center">
-                    Login 
-               </h1>
-               <p class="text-center lead">
-                    Entre em sua conta agora mesmo.
-               </p>
+<%- include('../../components/bg-decorations') %>
 
-              
+<div class="auth-wrapper">
+  <div class="auth-card">
+    <h1 class="auth-title">Login</h1>
+    <p class="auth-subtitle">Entre em sua conta agora mesmo.</p>
 
-               <div class="row" style="width: 100%;">
-                    <div class="col-lg">
-                        <form action="/auth/login" method="POST" class="col-md-4 " style="width: 100%;" id="form-login">
-                            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-                            <div class="mb-3">
-                              <label >Seu Email</label>
-                              <input type="email" class="form-control" name="email">
-                            </div>
-                            <div class="mb-3">
-                              <label>Sua senha</label>
-                              <input type="password" class="form-control" name="password" >
-                            </div>
-                            <button type="submit" class="btn btn-dark form-control">Faça login</button>
-                         </form>
-                         <br>
-                         <a href="/auth/register" class="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" >Faça seu cadastro</a>
-                    </div>
-               </div>
-          </div>
-          
-          <div class="col-lg-2"></div>
-     </div>
+    <% if (typeof error !== 'undefined' && error) { %>
+      <div class="alert alert-danger py-2 mb-3" style="font-size: 0.88rem; border-radius: 0.6rem; background: rgba(220, 53, 69, 0.2); border-color: rgba(220, 53, 69, 0.4); color: #ff8591;">
+        <%= error %>
+      </div>
+    <% } %>
+
+    <form action="/auth/login" method="POST" id="form-login">
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+
+      <div class="mb-3">
+        <label for="login-email" class="form-label">Seu Email</label>
+        <input id="login-email" type="email" class="form-control" name="email" placeholder="dev@exemplo.com" required>
+      </div>
+
+      <div class="mb-4">
+        <label for="login-password" class="form-label">Sua senha</label>
+        <input id="login-password" type="password" class="form-control" name="password" placeholder="••••••••" required>
+      </div>
+
+      <button id="btn-login-submit" type="submit" class="btn-grad w-100 py-2">Faça login</button>
+    </form>
+
+    <div class="text-center mt-4">
+      <a href="/auth/register" class="auth-footer-link">Não tem uma conta? Faça seu cadastro</a>
+    </div>
+  </div>
 </div>
+
 <%- include('../../components/footer') %>
