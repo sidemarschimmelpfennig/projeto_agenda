@@ -1,0 +1,825 @@
+/* public/styles/dev-theme.css */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600;700&display=swap');
+
+:root {
+  --bg: #1c1d21;
+  --bg-soft: #26272c;
+  --bg-card: rgba(38, 39, 44, 0.88);
+  --line: rgba(255, 255, 255, 0.06);
+  --text: #e9e9ec;
+  --muted: #b5b6bc;
+  --lime: #a6f20f;
+  --yellow: #e8f21c;
+  --pink: #ff2d87;
+  --cyan: #22d3ee;
+  --grad: linear-gradient(90deg, var(--lime) 0%, var(--pink) 100%);
+  --grad-title: linear-gradient(90deg, #8ff21c 0%, #d97aa0 35%, #e8e41c 60%, #ff2d87 100%);
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Open Sans', system-ui, -apple-system, sans-serif;
+  min-height: 100vh;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+/* ==========================================================================
+   Navbar "Agenda do Dev"
+   ========================================================================== */
+.dev-header,
+.navbar.navbar-dev {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.65rem 1.5rem;
+  background: rgba(38, 39, 44, 0.92);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+}
+
+.dev-brand {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: 1.25rem;
+  letter-spacing: 0.6px;
+  text-decoration: none;
+  display: inline-flex;
+  gap: 0.35rem;
+  align-items: center;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.dev-brand .a,
+.dev-brand .b {
+  white-space: nowrap;
+}
+
+.dev-brand .a {
+  color: var(--lime);
+}
+
+.dev-brand .b {
+  color: #3b82f6;
+}
+
+.dev-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  flex-shrink: 0;
+}
+
+.dev-nav-link {
+  color: var(--text);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  white-space: nowrap;
+  transition: color 0.2s ease, background 0.2s ease;
+}
+
+.dev-nav-link:hover {
+  color: var(--lime);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+/* Botões do tema */
+.btn-outline-dev,
+.btn-grad-outline,
+.btn-grad,
+.btn-ghost {
+  font-size: 0.88rem;
+  padding: 0.38rem 0.95rem;
+  border-radius: 999px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.btn-outline-dev {
+  border: 1px solid #cfcfd4;
+  color: var(--text);
+  background: transparent;
+}
+
+.btn-outline-dev:hover {
+  background: #fff;
+  color: var(--bg);
+  border-color: #fff;
+}
+
+.btn-grad-outline {
+  color: var(--text);
+  border: 2px solid transparent;
+  background: linear-gradient(var(--bg-soft), var(--bg-soft)) padding-box, var(--grad) border-box;
+}
+
+.btn-grad-outline:hover {
+  background: var(--grad) border-box;
+  color: #111;
+}
+
+.btn-grad {
+  border: 0;
+  background: var(--grad);
+  color: #111;
+  font-weight: 700;
+  box-shadow: 0 4px 14px rgba(255, 45, 135, 0.25);
+}
+
+.btn-grad:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 45, 135, 0.45);
+  color: #111;
+}
+
+.btn-ghost {
+  border: 2px solid #e9e9ec;
+  color: var(--text);
+  background: transparent;
+}
+
+.btn-ghost:hover {
+  background: #fff;
+  color: var(--bg);
+}
+
+/* ==========================================================================
+   Background Decorations (Grids, Dots, Code Symbols)
+   ========================================================================== */
+.bg-deco {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.grid-box {
+  position: absolute;
+  width: 260px;
+  height: 230px;
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 52px 52px;
+  border: 1px solid var(--line);
+}
+
+.dots {
+  position: absolute;
+  width: 90px;
+  height: 90px;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.12) 2.5px, transparent 3px);
+  background-size: 18px 18px;
+}
+
+.code-sym {
+  position: absolute;
+  font-family: 'Montserrat', monospace;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.08);
+  font-size: 2rem;
+  user-select: none;
+  animation: float 7s ease-in-out infinite;
+}
+
+.code-lines {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.code-lines span {
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.07);
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes shine {
+  to {
+    background-position: 200% center;
+  }
+}
+
+/* ==========================================================================
+   Auth Cards & Formulários (Login / Register)
+   ========================================================================== */
+.auth-wrapper {
+  position: relative;
+  z-index: 1;
+  min-height: calc(100vh - 65px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2.5rem 1rem;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 440px;
+  background: var(--bg-card);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1.25rem;
+  padding: 2.2rem;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
+}
+
+.auth-title {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: 1.85rem;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.4rem;
+  text-align: center;
+  background: var(--grad-title);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.auth-subtitle {
+  color: var(--muted);
+  font-size: 0.92rem;
+  text-align: center;
+  margin-bottom: 1.75rem;
+}
+
+.auth-card .form-label {
+  color: #cfcfd4;
+  font-size: 0.86rem;
+  font-weight: 600;
+  margin-bottom: 0.35rem;
+}
+
+.auth-card .form-control {
+  background: #24252b;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #f1f1f4;
+  border-radius: 0.65rem;
+  padding: 0.65rem 0.95rem;
+  font-size: 0.92rem;
+  transition: all 0.2s ease;
+}
+
+.auth-card .form-control:focus {
+  background: #282930;
+  color: #fff;
+  border-color: var(--lime);
+  box-shadow: 0 0 0 3px rgba(166, 242, 15, 0.2);
+  outline: 0;
+}
+
+.auth-card .form-control::placeholder {
+  color: #71737e;
+}
+
+.auth-footer-link {
+  color: var(--cyan);
+  text-decoration: none;
+  font-size: 0.88rem;
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+
+.auth-footer-link:hover {
+  color: var(--lime);
+  text-decoration: underline;
+}
+
+/* ==========================================================================
+   Hero Section
+   ========================================================================== */
+.hero {
+  position: relative;
+  z-index: 1;
+  min-height: calc(100vh - 65px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 3rem 1rem;
+}
+
+.hero-illustration {
+  width: 130px;
+  height: 130px;
+  margin-bottom: 1.5rem;
+  filter: drop-shadow(0 0 28px rgba(166, 242, 15, 0.35));
+  animation: float 5s ease-in-out infinite;
+}
+
+.hero h1 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: clamp(2.4rem, 6vw, 3.6rem);
+  letter-spacing: 2px;
+  margin: 0 0 0.75rem;
+  background: var(--grad-title);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shine 6s linear infinite;
+}
+
+.hero .subtitle {
+  font-size: clamp(1.15rem, 2.4vw, 1.5rem);
+  color: var(--text);
+  margin-bottom: 0.6rem;
+}
+
+.hero .desc {
+  color: var(--muted);
+  font-size: 0.95rem;
+  margin-bottom: 2.2rem;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  min-width: 410px;
+  width: 700px;
+  background: #2c2d33;
+  border-radius: 999px;
+  padding: 5px 5px 5px 1.1rem;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 6px 20px rgba(0, 0, 0, 0.35);
+  transition: box-shadow 0.25s ease;
+}
+
+.search-bar:focus-within {
+  box-shadow: 0 0 0 2px rgba(166, 242, 15, 0.45), 0 6px 24px rgba(0, 0, 0, 0.4);
+}
+
+.search-bar input {
+  flex: 1;
+  background: transparent;
+  border: 0;
+  outline: 0;
+  color: var(--text);
+  font-size: 0.88rem;
+}
+
+.search-bar input::placeholder {
+  color: #a9aab0;
+}
+
+.cta {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.8rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.cta .btn-grad {
+  padding: 0.55rem 1.2rem;
+  font-size: 0.95rem;
+}
+
+@media (max-width: 768px) {
+  .grid-box,
+  .code-lines {
+    display: none;
+  }
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 576px) {
+  .dev-header {
+    padding: 0.5rem 0.85rem;
+    gap: 0.5rem;
+  }
+
+  .dev-brand {
+    font-size: 1.05rem;
+    letter-spacing: 0.2px;
+    gap: 0.25rem;
+  }
+
+  .dev-nav {
+    gap: 0.4rem;
+  }
+
+  .btn-outline-dev,
+  .btn-grad-outline,
+  .btn-grad {
+    font-size: 0.78rem;
+    padding: 0.28rem 0.65rem;
+  }
+
+  .dev-nav-link {
+    font-size: 0.8rem;
+    padding: 0.25rem 0.5rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .dev-header {
+    padding: 0.45rem 0.5rem;
+  }
+  .dev-brand {
+    font-size: 0.92rem;
+  }
+  .btn-outline-dev,
+  .btn-grad-outline {
+    font-size: 0.72rem;
+    padding: 0.22rem 0.5rem;
+  }
+}
+
+/* ==========================================================================
+   Contacts Grid & Table
+   ========================================================================== */
+.contacts-container {
+  position: relative;
+  z-index: 1;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2.2rem 1.25rem;
+}
+
+.contacts-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.75rem;
+}
+
+.contacts-title-area {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.contacts-title {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: 1.9rem;
+  margin: 0;
+  background: var(--grad-title);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.contacts-count-badge {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--lime);
+  border: 1px solid rgba(166, 242, 15, 0.3);
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 0.22rem 0.7rem;
+  border-radius: 999px;
+}
+
+.contacts-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.contacts-search-box {
+  position: relative;
+  min-width: 250px;
+}
+
+.contacts-search-box input {
+  background: #24252b;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text);
+  border-radius: 999px;
+  padding: 0.45rem 1rem 0.45rem 2.2rem;
+  font-size: 0.88rem;
+  outline: 0;
+  width: 100%;
+  transition: all 0.2s ease;
+}
+
+.contacts-search-box input:focus {
+  border-color: var(--lime);
+  box-shadow: 0 0 0 3px rgba(166, 242, 15, 0.18);
+}
+
+.contacts-search-box .search-icon {
+  position: absolute;
+  left: 0.85rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--muted);
+  pointer-events: none;
+  font-size: 0.88rem;
+}
+
+/* Alternância responsiva automática:
+   Desktop (>= 1050px) -> Lista / Tabela
+   Telas menores (< 1050px) -> Cards
+*/
+@media (min-width: 1050px) {
+  #gridView {
+    display: none !important;
+  }
+  #tableView:not(.d-none) {
+    display: block;
+  }
+}
+
+@media (max-width: 1049.98px) {
+  #tableView {
+    display: none !important;
+  }
+  #gridView:not(.d-none) {
+    display: grid;
+  }
+}
+
+/* Tabela estilizada Dev */
+.dev-table-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.45);
+}
+
+.table.dev-table {
+  margin: 0;
+  color: var(--text);
+  border-collapse: separate;
+  border-spacing: 0;
+  --bs-table-bg: transparent;
+}
+
+.dev-table thead th {
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--muted);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.dev-table tbody td {
+  padding: 0.95rem 1.25rem;
+  vertical-align: middle;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  color: #e2e4e8;
+  font-size: 0.92rem;
+  background: transparent;
+}
+
+.dev-table tbody tr {
+  transition: background 0.18s ease;
+}
+
+.dev-table tbody tr:hover {
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.dev-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #2b303c, #1f2229);
+  border: 1.5px solid rgba(166, 242, 15, 0.4);
+  color: var(--lime);
+  font-weight: 800;
+  font-size: 0.95rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 0.85rem;
+  flex-shrink: 0;
+}
+
+.contact-name-cell {
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+  color: #fff;
+}
+
+.contact-phone-badge {
+  display: inline-block;
+  background: rgba(34, 211, 238, 0.1);
+  color: var(--cyan);
+  border: 1px solid rgba(34, 211, 238, 0.25);
+  padding: 0.2rem 0.65rem;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.contact-email-link {
+  color: #c9cbcf;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.contact-email-link:hover {
+  color: var(--cyan);
+  text-decoration: underline;
+}
+
+.btn-action-edit {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--text);
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.3rem 0.75rem;
+  border-radius: 999px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.btn-action-edit:hover {
+  background: #fff;
+  color: #111;
+}
+
+.btn-action-delete {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.25);
+  color: #f87171;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.3rem 0.75rem;
+  border-radius: 999px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.btn-action-delete:hover {
+  background: #ef4444;
+  color: #fff;
+}
+
+/* Grid de Cards */
+.contacts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 1.25rem;
+}
+
+.contact-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1rem;
+  padding: 1.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.contact-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.45);
+  border-color: rgba(166, 242, 15, 0.3);
+}
+
+.contact-card-top {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.contact-card-info h4 {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.contact-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  font-size: 0.88rem;
+  color: var(--muted);
+}
+
+.contact-card-body .item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.contact-card-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  padding-top: 0.85rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* Empty State */
+.dev-empty-state {
+  text-align: center;
+  padding: 4rem 1.5rem;
+  background: var(--bg-card);
+  border: 1px dashed rgba(255, 255, 255, 0.12);
+  border-radius: 1.25rem;
+  backdrop-filter: blur(8px);
+}
+
+.dev-empty-icon {
+  width: 72px;
+  height: 72px;
+  margin-bottom: 1.25rem;
+  opacity: 0.85;
+}
+
+.dev-empty-state h3 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 1.35rem;
+  color: #fff;
+  margin-bottom: 0.5rem;
+}
+
+.dev-empty-state p {
+  color: var(--muted);
+  max-width: 440px;
+  margin: 0 auto 1.5rem;
+  font-size: 0.95rem;
+}
+
+@media (max-width: 640px) {
+  .contacts-toolbar {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .contacts-search-box {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .contacts-toolbar .btn-grad {
+    text-align: center;
+    justify-content: center;
+  }
+
+  .contacts-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+
+

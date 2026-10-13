@@ -1,8 +1,8 @@
-import { IsNotEmpty, IsEmail, MinLength } from 'class-validator';
+import { IsNotEmpty, IsEmail, MinLength, IsOptional } from 'class-validator';
 
 export class AuthCredentialsDto {
-  @IsNotEmpty({ message: 'Nome é obrigatório' })
-  name: string;
+  @IsOptional()
+  name?: string;
 
   @IsEmail()
   @IsNotEmpty({ message: 'Email é obrigatório' })

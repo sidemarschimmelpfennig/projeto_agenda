@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" role="img" aria-label="Agenda com lupa">
+  <!-- tags -->
+  <rect x="88" y="14" width="36" height="22" rx="4" fill="#a6f20f"/>
+  <circle cx="100" cy="25" r="6" fill="#111"/><path d="M100 21v4l3 2" stroke="#a6f20f" stroke-width="1.6" fill="none"/>
+  <rect x="102" y="28" width="40" height="22" rx="4" fill="#ff2d87"/>
+  <rect x="108" y="33" width="12" height="11" rx="1.5" fill="#111"/>
+  <path d="M125 39l4 4 7-8" stroke="#111" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+  <rect x="120" y="58" width="22" height="20" rx="4" fill="#e8f21c"/>
+  <circle cx="129" cy="66" r="4" stroke="#111" stroke-width="2" fill="none"/><path d="M132 69l4 4" stroke="#111" stroke-width="2"/>
+  <rect x="114" y="54" width="8" height="14" fill="#ff2d87"/>
+  <path d="M128 84l5 5 5-5" stroke="#22d3ee" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+  <path d="M130 100l6 6-6 6" stroke="#fff" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+  <!-- arrow -->
+  <path d="M30 50c0-18 14-28 34-26" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <path d="M58 18l8 6-8 6" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <!-- speed lines -->
+  <path d="M10 76h18M16 84h12M14 68h12" stroke="#22d3ee" stroke-width="3" stroke-linecap="round"/>
+  <!-- notebook -->
+  <rect x="40" y="42" width="78" height="96" rx="6" fill="#fff"/>
+  <rect x="36" y="38" width="78" height="96" rx="6" fill="#33353b" stroke="#111" stroke-width="4"/>
+  <line x1="48" y1="40" x2="48" y2="132" stroke="#111" stroke-width="3"/>
+  <g stroke="#111" stroke-width="4" fill="none" stroke-linecap="round">
+    <path d="M44 52a6 6 0 1 0-6 6"/><path d="M44 68a6 6 0 1 0-6 6"/><path d="M44 84a6 6 0 1 0-6 6"/>
+    <path d="M44 100a6 6 0 1 0-6 6"/><path d="M44 116a6 6 0 1 0-6 6"/>
+  </g>
+  <path d="M58 52h8M58 108h8M58 120h12" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/>
+  <path d="M78 108h22M78 120h22" stroke="#111" stroke-width="2.6" stroke-linecap="round"/>
+  <!-- magnifier -->
+  <line x1="104" y1="100" x2="122" y2="118" stroke="#111" stroke-width="12" stroke-linecap="round"/>
+  <line x1="104" y1="100" x2="120" y2="116" stroke="#22d3ee" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="88" cy="80" r="26" fill="#111"/>
+  <circle cx="88" cy="80" r="19" fill="#2a2c31" stroke="#fff" stroke-width="3"/>
+  <path d="M76 72a14 14 0 0 1 12-8" stroke="#22d3ee" stroke-width="3.4" fill="none" stroke-linecap="round"/>
+  <path d="M82 80h18M82 88h14" stroke="#111" stroke-width="2.6" stroke-linecap="round"/>
+</svg>

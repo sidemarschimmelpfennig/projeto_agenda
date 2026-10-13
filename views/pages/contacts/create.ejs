@@ -1,46 +1,47 @@
 <%- include('../../components/head') %>
-<%- include('../../components/nav') %>
+<%- include('../../components/navbar') %>
+<%- include('../../components/bg-decorations') %>
 
-<div class="container">
-  <div class="row">
-    <div class="col-lg-2"></div>
-    
-    <div class="col-lg-8 my-3">
-      <h1 class="text-center">Contato</h1>
-      <p class="text-center lead">Crie ou edite seu contato abaixo.</p>
+<div class="auth-wrapper">
+  <div class="auth-card" style="max-width: 520px;">
+    <h1 class="auth-title">Novo Contato</h1>
+    <p class="auth-subtitle">Preencha as informações para adicionar à sua agenda.</p>
 
-      <%- include('../../components/messages') %>
+    <% if (typeof error !== 'undefined' && error) { %>
+      <div class="alert alert-danger py-2 mb-3" style="font-size: 0.88rem; border-radius: 0.6rem; background: rgba(220, 53, 69, 0.2); border-color: rgba(220, 53, 69, 0.4); color: #ff8591;">
+        <%= error %>
+      </div>
+    <% } %>
 
+    <form action="/contacts" method="POST" id="form-create-contact">
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
 
-      <% if(contact.id) { %>
-        <form action="/contact/edit/<%= contact.id %>" method="POST">
-        <% } else { %>
-        <form action="/contact/register" method="POST">
-        <% } %>
-        <input type="hidden" name="_csrf" value=<%= csrfToken %>>
-        <div class="mb-3">
-          <label class="form-label">Nome</label>
-          <input value="<%= contact.name %>" type="text" class="form-control" name="name">
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label class="form-label" for="contact-name">Nome *</label>
+          <input type="text" class="form-control" id="contact-name" name="name" value="<%= typeof contact !== 'undefined' && contact.name ? contact.name : '' %>" placeholder="Ex: Lucas" required>
         </div>
-        <div class="mb-3">
-          <label class="form-label">Sobrenome</label>
-          <input value="<%= contact.last_name %>" type="text" class="form-control" name="last_name">
+        <div class="col-md-6 mb-3">
+          <label class="form-label" for="contact-lastname">Sobrenome</label>
+          <input type="text" class="form-control" id="contact-lastname" name="lastName" value="<%= typeof contact !== 'undefined' && (contact.lastName || contact.last_name) ? (contact.lastName || contact.last_name) : '' %>" placeholder="Ex: Silva">
         </div>
-        <div class="mb-3">
-          <label class="form-label">Email</label>
-          <input value="<%= contact.email %>" type="email" class="form-control" name="email">
-        </div>
-        <div class="mb-3">
-          <label class="form-label">Telefone</label>
-          <input value="<%= contact.phone %>" type="tel" class="form-control" name="phone">
-        </div>
-        <button type="submit" class="btn btn-dark">Salvar</button>
-      </form>
+      </div>
 
+      <div class="mb-3">
+        <label class="form-label" for="contact-email">Email</label>
+        <input type="email" class="form-control" id="contact-email" name="email" value="<%= typeof contact !== 'undefined' && contact.email ? contact.email : '' %>" placeholder="dev@exemplo.com">
+      </div>
 
-    </div>
+      <div class="mb-4">
+        <label class="form-label" for="contact-phone">Telefone</label>
+        <input type="tel" class="form-control" id="contact-phone" name="phone" value="<%= typeof contact !== 'undefined' && contact.phone ? contact.phone : '' %>" placeholder="(11) 98765-4321">
+      </div>
 
-    <div class="col-lg-2"></div>
+      <div class="d-flex gap-2">
+        <button type="submit" class="btn-grad flex-grow-1 py-2">Salvar Contato</button>
+        <a href="/contacts" class="btn-ghost py-2 px-3 text-center">Cancelar</a>
+      </div>
+    </form>
   </div>
 </div>
 

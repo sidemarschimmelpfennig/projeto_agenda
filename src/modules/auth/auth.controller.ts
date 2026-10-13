@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Render, Res } from '@nestjs/common';
+import { Controller, Get, Post, Body, Render, Res, Req } from '@nestjs/common';
 import type { Response } from 'express';
 import { AuthService } from './auth.service';
 import { AuthCredentialsDto } from './dto/auth-credentials.dto';
@@ -10,7 +10,6 @@ export class AuthController {
   @Get('login')
   @Render('pages/auth/login')
   getLogin() {
-    // Retorne um objeto com variáveis ou simplesmente {}
     return { title: 'Entrar' };
   }
 
@@ -39,11 +38,17 @@ export class AuthController {
   @Post('login')
   async login(
     @Body() authCredentialsDto: AuthCredentialsDto,
+    @Req() req: any,
     @Res() res: Response,
   ) {
     try {
       const user = await this.authService.login(authCredentialsDto);
-      // Aqui você salvará a sessão (req.session.user = user) ou cookie
+      if (req.session) {
+        req.session.user = user;
+        return req.session.save(() => {
+          res.redirect('/');
+        });
+      }
       return res.redirect('/');
     } catch (error: any) {
       return res.render('pages/auth/login', {
@@ -53,9 +58,14 @@ export class AuthController {
     }
   }
 
+  @Get('logout')
   @Post('logout')
-  logout(@Res() res: Response) {
-    // Destruir sessão/limpar cookie quando implementar sessões
+  logout(@Req() req: any, @Res() res: Response) {
+    if (req.session) {
+      return req.session.destroy(() => {
+        res.redirect('/auth/login');
+      });
+    }
     return res.redirect('/auth/login');
   }
-}
+}
