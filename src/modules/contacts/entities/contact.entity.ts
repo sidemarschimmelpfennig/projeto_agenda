@@ -5,10 +5,14 @@ import {
   Column,
   CreateDateColumn,
   UpdateDateColumn,
+  Unique,
 } from 'typeorm';
 
 @Entity('contacts')
-export class Contact{
+// Garante unicidade do par (userId, email) e do par (userId, phone)
+@Unique(['userId', 'email'])
+@Unique(['userId', 'phone'])
+export class Contact {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -18,10 +22,11 @@ export class Contact{
   @Column({ type: 'varchar', nullable: true, default: '' })
   lastName: string;
 
-  @Column({ type: 'varchar', nullable: false, default: '', unique: true })
+  // Removido o unique global e permitido null para respeitar a constraint única por usuário
+  @Column({ type: 'varchar', nullable: true, default: null })
   email: string;
 
-  @Column({ type: 'varchar', nullable: true, default: '', unique: true })
+  @Column({ type: 'varchar', nullable: true, default: null })
   phone: string;
 
   @Column({ type: 'integer', nullable: false })

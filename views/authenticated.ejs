@@ -1,18 +1,21 @@
 <%- include('components/head') %>
 <%- include('components/navbar') %>
+<%- include('components/bg-decorations') %>
 
-<div class="container">
-  <div class="row">
-    <div class="col-lg-2"></div>
-    <div class="col-lg-8 my-5">
-      <h1 class="text-center">
-        Projeto Minha Agenda
-      </h1>
-      <p class="text-center lead">
-        Bem Vindo Usuario logado na sua Agenda
-      </p> 
-    </div>
-    <div class="col-lg-2"></div>
+<div class="hero">
+  <img src="/images/hero-illustration.svg" alt="Agenda com lupa" class="hero-illustration">
+
+  <h1>AGENDA DO DEV</h1>
+  <p class="subtitle">
+    Olá, <strong><%= typeof user !== 'undefined' && user.name ? user.name : 'Desenvolvedor' %></strong>! Bem-vindo à sua agenda.
+  </p>
+  <p class="desc">
+    Gerencie seus contatos, compromissos e tarefas com rapidez.
+  </p>
+
+  <div class="cta">
+    <a id="cta-contacts" class="btn-grad" href="/contacts">Ver Meus Contatos</a>
+    <a id="cta-logout" class="btn-ghost" href="/auth/logout">Encerrar Sessão</a>
   </div>
 </div>
 

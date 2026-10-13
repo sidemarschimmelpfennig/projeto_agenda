@@ -1,0 +1,213 @@
+<%- include('../../components/head') %>
+<%- include('../../components/navbar') %>
+<%- include('../../components/bg-decorations') %>
+
+<div class="contacts-container">
+  <!-- Header & Toolbar -->
+  <div class="contacts-header">
+    <div class="contacts-title-area">
+      <h1 class="contacts-title">Meus Contatos</h1>
+      <span class="contacts-count-badge" id="contactsBadge">
+        <%= contacts.length %> <%= contacts.length === 1 ? 'contato' : 'contatos' %>
+      </span>
+    </div>
+
+    <div class="contacts-toolbar">
+      <% if (contacts.length > 0) { %>
+        <!-- Campo de busca rápida -->
+        <div class="contacts-search-box">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="contactSearch" placeholder="Filtrar por nome, email ou telefone..." autocomplete="off">
+        </div>
+      <% } %>
+
+      <a class="btn-grad" href="/contacts/create">
+        + Adicionar Contato
+      </a>
+    </div>
+  </div>
+
+  <% if (contacts.length > 0) { %>
+    <!-- 1. Visualização em Tabela (Data Table) -->
+    <div id="tableView" class="dev-table-card">
+      <div class="table-responsive">
+        <table class="table dev-table" id="contactsTable">
+          <thead>
+            <tr>
+              <th>Contato</th>
+              <th>Email</th>
+              <th>Telefone</th>
+              <th class="text-end">Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% contacts.forEach(contact => { %>
+              <tr class="contact-row" data-search="<%= (contact.name + ' ' + (contact.lastName || '') + ' ' + (contact.email || '') + ' ' + (contact.phone || '')).toLowerCase() %>">
+                <td>
+                  <div class="contact-name-cell">
+                    <span class="dev-avatar">
+                      <%= (contact.name || 'C').charAt(0).toUpperCase() %>
+                    </span>
+                    <div>
+                      <div><%= contact.name %> <%= contact.lastName || '' %></div>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <% if (contact.email) { %>
+                    <a href="mailto:<%= contact.email %>" class="contact-email-link">
+                      <%= contact.email %>
+                    </a>
+                  <% } else { %>
+                    <span class="text-muted">—</span>
+                  <% } %>
+                </td>
+                <td>
+                  <% if (contact.phone) { %>
+                    <a href="tel:<%= contact.phone %>" class="contact-phone-badge text-decoration-none">
+                      <%= contact.phone %>
+                    </a>
+                  <% } else { %>
+                    <span class="text-muted">—</span>
+                  <% } %>
+                </td>
+                <td class="text-end">
+                  <div class="d-inline-flex gap-2">
+                    <a href="/contacts/edit/<%= contact.id %>" class="btn-action-edit">
+                      ✏️ Editar
+                    </a>
+                    <a href="/contacts/delete/<%= contact.id %>" class="btn-action-delete" onclick="return confirm('Deseja realmente excluir este contato?')">
+                      🗑️ Excluir
+                    </a>
+                  </div>
+                </td>
+              </tr>
+            <% }); %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 2. Visualização em Cards Grid (Ativada automaticamente via CSS abaixo de 1050px) -->
+    <div id="gridView" class="contacts-grid">
+      <% contacts.forEach(contact => { %>
+        <div class="contact-card contact-grid-item" data-search="<%= (contact.name + ' ' + (contact.lastName || '') + ' ' + (contact.email || '') + ' ' + (contact.phone || '')).toLowerCase() %>">
+          <div class="contact-card-top">
+            <span class="dev-avatar">
+              <%= (contact.name || 'C').charAt(0).toUpperCase() %>
+            </span>
+            <div class="contact-card-info">
+              <h4><%= contact.name %> <%= contact.lastName || '' %></h4>
+            </div>
+          </div>
+
+          <div class="contact-card-body">
+            <div class="item">
+              <span>📧</span>
+              <% if (contact.email) { %>
+                <a href="mailto:<%= contact.email %>" class="contact-email-link">
+                  <%= contact.email %>
+                </a>
+              <% } else { %>
+                <span class="text-muted">Sem email cadastrado</span>
+              <% } %>
+            </div>
+
+            <div class="item">
+              <span>📱</span>
+              <% if (contact.phone) { %>
+                <a href="tel:<%= contact.phone %>" class="contact-phone-badge text-decoration-none">
+                  <%= contact.phone %>
+                </a>
+              <% } else { %>
+                <span class="text-muted">Sem telefone cadastrado</span>
+              <% } %>
+            </div>
+          </div>
+
+          <div class="contact-card-footer">
+            <a href="/contacts/edit/<%= contact.id %>" class="btn-action-edit">
+              ✏️ Editar
+            </a>
+            <a href="/contacts/delete/<%= contact.id %>" class="btn-action-delete" onclick="return confirm('Deseja realmente excluir este contato?')">
+              🗑️ Excluir
+            </a>
+          </div>
+        </div>
+      <% }); %>
+    </div>
+
+    <!-- Mensagem quando a busca não encontra nada -->
+    <div id="noSearchResults" class="dev-empty-state d-none mt-3">
+      <div class="fs-1 mb-2">🔍</div>
+      <h3>Nenhum resultado encontrado</h3>
+      <p>Tente buscar por outro termo ou limpe o campo de busca.</p>
+    </div>
+
+  <% } else { %>
+    <!-- Empty State quando não há contatos cadastrados -->
+    <div class="dev-empty-state">
+      <svg class="dev-empty-icon" viewBox="0 0 64 64" fill="none" stroke="currentColor">
+        <rect x="12" y="8" width="40" height="48" rx="4" stroke="#a6f20f" stroke-width="2.5" fill="#24252b"/>
+        <line x1="20" y1="20" x2="36" y2="20" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/>
+        <line x1="20" y1="28" x2="44" y2="28" stroke="rgba(255,255,255,0.4)" stroke-width="2" stroke-linecap="round"/>
+        <line x1="20" y1="36" x2="40" y2="36" stroke="rgba(255,255,255,0.4)" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="44" cy="44" r="10" fill="#24252b" stroke="#ff2d87" stroke-width="2.5"/>
+        <line x1="44" y1="40" x2="44" y2="48" stroke="#ff2d87" stroke-width="2.5" stroke-linecap="round"/>
+        <line x1="40" y1="44" x2="48" y2="44" stroke="#ff2d87" stroke-width="2.5" stroke-linecap="round"/>
+      </svg>
+      <h3>Sua agenda está vazia</h3>
+      <p>Você ainda não possui contatos cadastrados. Adicione seu primeiro contato para começar a organizar sua rede de desenvolvedores!</p>
+      <a class="btn-grad" href="/contacts/create">
+        + Adicionar Primeiro Contato
+      </a>
+    </div>
+  <% } %>
+</div>
+
+<script>
+  // Filtro de busca instantânea (atua tanto na tabela quanto nos cards)
+  document.addEventListener('DOMContentLoaded', function () {
+    const searchInput = document.getElementById('contactSearch');
+    const tableRows = document.querySelectorAll('.contact-row');
+    const gridItems = document.querySelectorAll('.contact-grid-item');
+    const noResults = document.getElementById('noSearchResults');
+    const tableView = document.getElementById('tableView');
+    const gridView = document.getElementById('gridView');
+
+    // Busca rápida em tempo real
+    if (searchInput) {
+      searchInput.addEventListener('input', function () {
+        const query = this.value.trim().toLowerCase();
+        let visibleCount = 0;
+
+        tableRows.forEach(row => {
+          const text = row.getAttribute('data-search') || '';
+          const match = text.includes(query);
+          row.style.display = match ? '' : 'none';
+          if (match) visibleCount++;
+        });
+
+        gridItems.forEach(card => {
+          const text = card.getAttribute('data-search') || '';
+          const match = text.includes(query);
+          card.style.display = match ? '' : 'none';
+        });
+
+        if (noResults) {
+          if (visibleCount === 0 && query !== '') {
+            noResults.classList.remove('d-none');
+            if (tableView) tableView.classList.add('d-none');
+            if (gridView) gridView.classList.add('d-none');
+          } else {
+            noResults.classList.add('d-none');
+            if (tableView) tableView.classList.remove('d-none');
+            if (gridView) gridView.classList.remove('d-none');
+          }
+        }
+      });
+    }
+  });
+</script>
+
+<%- include('../../components/footer') %>
